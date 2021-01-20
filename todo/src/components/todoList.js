@@ -2,6 +2,9 @@ import React from 'react';
 import Todo from './todo';
 
 const TodoList = (props) => {
+  const handleClick = () => {
+    props.handleClearCompleted();
+  }
     return(
         <div className="todoList">
         <h3>List of Tasks for today!</h3>
@@ -12,7 +15,7 @@ const TodoList = (props) => {
             })
           }
         </ul>
-        <button>Clear Completed!</button>
+        <button onClick={handleClick}>Clear Completed!</button>
       </div>
     )
 }

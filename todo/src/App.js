@@ -4,7 +4,7 @@ import TodoList from './components/todoList';
 import TodoForm from './components/todoForm';
 import { useReducer } from 'react';
 import reducer, { initialState } from './reducer';
-import { addTodo, toggleCompleted } from './actions';
+import { addTodo, clearCompleted, toggleCompleted } from './actions';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -18,13 +18,16 @@ function App() {
   const handleToggleCompleted = (id) => {
     dispatch(toggleCompleted(id))
   };
+  const handleClearCompleted = () => {
+    dispatch(clearCompleted());
+  }
 
   // console.log('application sate', state)
   return (
     <div className="App">
      <h1>Todo List!</h1>
     {/* <button onClick={handleToggleCompleted}>Test button</button> */}
-    <TodoList todos={state.todos} handleToggleCompleted={handleToggleCompleted} />
+    <TodoList todos={state.todos} handleToggleCompleted={handleToggleCompleted} handleClearCompleted={handleClearCompleted}/>
     <TodoForm  handleAddTodo={handleAddTodo} />
      
     </div>
