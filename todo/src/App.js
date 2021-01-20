@@ -1,45 +1,28 @@
 import './App.css';
+import TodoList from './components/todoList'; 
+import TodoForm from './components/todoForm';
+import { useReducer } from 'react';
+import reducer, { initialState } from './reducer';
+import { addTodo } from './actions';
 
 function App() {
-  const todos = [{
-    title: 'todo 1',
-    id: 0,
-    completed: false
-  },
-  {
-    title: 'todo 2',
-    id: 1,
-    completed: false
-  },
-  {
-    title: 'todo 3',
-    id: 2,
-    completed: false
-  }]
+  const [state, dispatch] = useReducer(reducer, initialState)
   
+  const handleAddTodo = (title) => {
+    //it takes in action object and passes it into the reducer we connected it to
+    //pass in the current state of our APP
+    //get new state made and re renders
+    dispatch(addTodo(title));
+  };
+
+
   return (
     <div className="App">
      <h1>Todo List!</h1>
-     <div className="todoList">
-       <h3>List of Tasks for today!</h3>
-       <ul>
-         {
-           todos.map(todo => {
-             return(<li>{todo.title}</li>)
-           })
-         }
-       </ul>
-       <button>Clear Completed!</button>
-     </div>
-      <div className='todoForm'>
-        <form>
-          <labe>
-            What is your task?
-            <input />
-            <button>Make it happen</button>
-          </labe>
-        </form>
-      </div>
+    {/* <button onClick={handleClick}>Test button</button> */}
+    <TodoList todos={state.todos}/>
+    <TodoForm  handleAddTodo={handleAddTodo}/>
+     
     </div>
   );
 }
