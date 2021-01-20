@@ -15,7 +15,7 @@ function App() {
     dispatch(addTodo(title));
   };
 
-
+  // console.log('application sate', state)
   return (
     <div className="App">
      <h1>Todo List!</h1>
