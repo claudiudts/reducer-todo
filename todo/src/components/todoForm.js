@@ -11,7 +11,7 @@ class TodoForm extends React.Component {
     }
 
   handleChange = (e) => {
-    this.setState({
+      this.setState({
       inputText:e.target.value
     })
   }

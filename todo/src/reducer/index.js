@@ -23,13 +23,23 @@ export const initialState = {
 const reducer = (state, action) => {
     switch(action.type) {
         case("ADD_TODO"):
-        const newTodo = {
-            id: state.todos.length,
-            completed: false,
-            title: action.payload
-        };
-
-        return({...state, todos:[...state.todos, newTodo]})
+            const newTodo = {
+                id: state.todos.length,
+                completed: false,
+                title: action.payload
+            };
+        return({...state, todos:[...state.todos, newTodo]});
+            case("TOGGLE_COMPLETED"):
+                //1. want to map through all the todos
+                //2. if todos has the ID we are looking for (in the action.payload)
+                //3. return a copy of that item with Completed = true
+                return({...state, todos:state.todos.map(todo=>{
+                    if (todo.id === action.payload) {
+                        return({...todo, completed: !todo.completed});
+                    } else {
+                        return(todo);
+                    }
+                })});
         default:
             return state;
     }
